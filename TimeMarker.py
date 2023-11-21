@@ -54,7 +54,7 @@ class TimeMarker:
         smooth_rate=10,
         callback=None,
         callback_mode=CallbackMode.interval,
-        twelveHour=True,
+        twelve_hour=True,
         time_format=None,
         progress_bar=False,
         progress_bar_length=50,
@@ -78,7 +78,7 @@ class TimeMarker:
         self.smooth_rate = smooth_rate
         self.callback = callback
         self.callback_mode = callback_mode
-        self.twelveHour = twelveHour
+        self.twelve_hour = twelve_hour
         self.time_format = time_format
         self.progress_bar = progress_bar
         self.progress_bar_length = progress_bar_length
@@ -98,7 +98,7 @@ class TimeMarker:
             # Allow custom formats
             return time.strftime(self.time_format, time.localtime(time.time() + offset))
         else:
-            if self.twelveHour:
+            if self.twelve_hour:
                 # 12 Hour format
                 return time.strftime(
                     "%Y-%m-%d %I:%M:%S %p", time.localtime(time.time() + offset)
