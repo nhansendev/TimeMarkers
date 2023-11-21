@@ -79,6 +79,7 @@ A configurable timer class for tracking time in long-running processes
 
 ### Result:
 Default config:
+
 Note: the progress bar characters don't render correctly on GitHub.
 
 	2023-11-21 12:57:09 AM | 00:00:01/00:00:22 elap/rem | Est: 2023-11-21 12:57:32 AM | 0.250 sec/step avg <00:00:00> |  10/100 pts ( 10.0%) | |▒▒▒▒▒    .         .         .         .         .|
@@ -117,3 +118,14 @@ Note: the progress bar characters don't render correctly on GitHub.
 	|▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒         .| |  80/100 pts ( 80.0%) | Est: 2023-11-21 01:20:46 AM
 	|▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒    .| |  90/100 pts ( 90.0%) | Est: 2023-11-21 01:20:45 AM
 	|▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒| | 100/100 pts (100.0%) | Est: 2023-11-21 01:20:45 AM
+
+
+
+# License
+Copyright (c) 2023, Nathan Hansen
+
+All rights reserved.
+
+This source code is licensed under the BSD-style license found in the
+
+LICENSE file in the root directory of this source tree.
