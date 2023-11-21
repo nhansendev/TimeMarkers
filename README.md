@@ -78,6 +78,8 @@ A configurable timer class for tracking time in long-running processes
 	TM() # Should be called one final time afterwards to show 100%
 
 ### Result:
+Note: the progress bar characters don't render correctly on GitHub.
+
 	2023-11-21 12:57:09 AM | 00:00:01/00:00:22 elap/rem | Est: 2023-11-21 12:57:32 AM | 0.250 sec/step avg <00:00:00> |  10/100 pts ( 10.0%) | |▒▒▒▒▒    .         .         .         .         .|
 	2023-11-21 12:57:11 AM | 00:00:04/00:00:17 elap/rem | Est: 2023-11-21 12:57:29 AM | 0.222 sec/step avg <00:00:00> |  20/100 pts ( 20.0%) | |▒▒▒▒▒▒▒▒▒▒         .         .         .         .|
 	2023-11-21 12:57:14 AM | 00:00:06/00:00:14 elap/rem | Est: 2023-11-21 12:57:28 AM | 0.213 sec/step avg <00:00:00> |  30/100 pts ( 30.0%) | |▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒    .         .         .         .|
