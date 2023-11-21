@@ -29,7 +29,7 @@ class Segments(Enum):
 class TimeWrap:
     # A simple context for timing code execution
     # Usage: "with TimeWrap(msg): *your code*"
-    def __init__(self, msg, just=50, use_HMS_format=False) -> None:
+    def __init__(self, msg="", just=50, use_HMS_format=False) -> None:
         self.msg = msg
         self.just = just
         self.use_HMS_format = use_HMS_format
