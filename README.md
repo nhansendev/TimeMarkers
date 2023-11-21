@@ -48,7 +48,7 @@ A configurable timer class for tracking time in long-running processes
  - interval = 1 # each time the **index_interval** is reached the callback will be called
  - timed = 2 # each time the **time_interval** is reached the callback will be called
  - both = 3 # each time **either** interval is reached the callback will be called
-#### twelveHour | *bool, default=True*:
+#### twelve_hour | *bool, default=True*:
 >Displays time in 12 hour or 24 hour format
 #### time_format | *str, default=None*:
 >Overrides time formatting to something custom
