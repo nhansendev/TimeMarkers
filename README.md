@@ -35,7 +35,7 @@ A configurable timer class for tracking time in long-running processes
 #### est_iters | *int, default=None*:
 >The expected total number of iterations. Required to estimate completion time
 #### index_interval | *int, default=None*:
->After every X **updates** print the progress (and trigger a callback if configured)
+>After every X **ierations** print the progress (and trigger a callback if configured)
 #### time_interval | *float, default=None*:
 >After every X **seconds** print the progress (and trigger a callback if configured)
 >Note: can't trigger faster than the iterations are called
