@@ -1,3 +1,9 @@
+# Copyright (c) 2023, Nathan Hansen
+# All rights reserved.
+
+# This source code is licensed under the BSD-style license found in the
+# LICENSE file in the root directory of this source tree.
+
 def sec_to_HMS(value, show_ms=False):
     # Convert numerical seconds to string HH:MM:SS / HH:MM:SS.ms
 
