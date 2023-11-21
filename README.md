@@ -38,6 +38,7 @@ A configurable timer class for tracking time in long-running processes
 >After every X **updates** print the progress (and trigger a callback if configured)
 #### time_interval | *float, default=None*:
 >After every X **seconds** print the progress (and trigger a callback if configured)
+>Note: can't trigger faster than the iterations are called
 #### smooth_rate | *float, default=None*:
 >The time intervals between iterations are averaged if smooth_rate is > 1, with larger values leading to longer averaging
 #### callback | *any callable, default=None*:
@@ -64,3 +65,26 @@ A configurable timer class for tracking time in long-running processes
  - progress  =  4 # the completed iterations, and the remaining iterations if est_iters was defined
  - bargraph  =  5 # a bar graph showing progress if est_iters was defined
  - default  =  tuple(range(6)) # each of the above
+
+
+### Usage Example:
+    from TimeMarkers import TimeMarker
+    
+    TM = TimeMarker(100, 10)
+
+	for _ in range(100):
+		TM() # Should be placed before code execution in loop
+		*do something*	
+	TM() # Should be called one final time afterwards to show 100%
+
+### Result:
+	2023-11-21 12:57:09 AM | 00:00:01/00:00:22 elap/rem | Est: 2023-11-21 12:57:32 AM | 0.250 sec/step avg <00:00:00> |  10/100 pts ( 10.0%) | |▒▒▒▒▒    .         .         .         .         .|
+	2023-11-21 12:57:11 AM | 00:00:04/00:00:17 elap/rem | Est: 2023-11-21 12:57:29 AM | 0.222 sec/step avg <00:00:00> |  20/100 pts ( 20.0%) | |▒▒▒▒▒▒▒▒▒▒         .         .         .         .|
+	2023-11-21 12:57:14 AM | 00:00:06/00:00:14 elap/rem | Est: 2023-11-21 12:57:28 AM | 0.213 sec/step avg <00:00:00> |  30/100 pts ( 30.0%) | |▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒    .         .         .         .|
+	2023-11-21 12:57:16 AM | 00:00:08/00:00:12 elap/rem | Est: 2023-11-21 12:57:29 AM | 0.216 sec/step avg <00:00:00> |  40/100 pts ( 40.0%) | |▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒         .         .         .|
+	2023-11-21 12:57:17 AM | 00:00:09/00:00:08 elap/rem | Est: 2023-11-21 12:57:26 AM | 0.178 sec/step avg <00:00:00> |  50/100 pts ( 50.0%) | |▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒    .         .         .|
+	2023-11-21 12:57:20 AM | 00:00:12/00:00:10 elap/rem | Est: 2023-11-21 12:57:30 AM | 0.253 sec/step avg <00:00:00> |  60/100 pts ( 60.0%) | |▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒         .         .|
+	2023-11-21 12:57:22 AM | 00:00:14/00:00:06 elap/rem | Est: 2023-11-21 12:57:28 AM | 0.210 sec/step avg <00:00:00> |  70/100 pts ( 70.0%) | |▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒    .         .|
+	2023-11-21 12:57:24 AM | 00:00:17/00:00:04 elap/rem | Est: 2023-11-21 12:57:29 AM | 0.215 sec/step avg <00:00:00> |  80/100 pts ( 80.0%) | |▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒         .|
+	2023-11-21 12:57:26 AM | 00:00:19/00:00:02 elap/rem | Est: 2023-11-21 12:57:29 AM | 0.213 sec/step avg <00:00:00> |  90/100 pts ( 90.0%) | |▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒    .|
+	2023-11-21 12:57:28 AM | 00:00:21/00:00:00 elap/rem | Est: 2023-11-21 12:57:28 AM | 0.210 sec/step avg <00:00:00> | 100/100 pts (100.0%) | |▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒|
