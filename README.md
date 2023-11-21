@@ -47,5 +47,20 @@ A configurable timer class for tracking time in long-running processes
  - interval = 1 # each time the **index_interval** is reached the callback will be called
  - timed = 2 # each time the **time_interval** is reached the callback will be called
  - both = 3 # each time **either** interval is reached the callback will be called
-#### callback | *any callable, default=None*:
->Depending on how callback_mode is configured, the provided callback will be called during progress updates
+#### twelveHour | *bool, default=True*:
+>Displays time in 12 hour or 24 hour format
+#### time_format | *str, default=None*:
+>Overrides time formatting to something custom
+#### progress_bar_length | *int, default=50*:
+>If a progress bar is displayed this is the total length in characters
+#### oneline | *bool, default=False*:
+>Repeatedly update the same line when printing
+#### segments | *Segments Enum, default=Segments.default.value*:
+>The displayed information can be customized by providing a list/tuple of segment IDs.
+ - timestamp  =  0 # the current time when the progress update was triggered
+ - elapsed  =  1 # how much time has elapsed since the beginning, and a remaining time estimate if est_iters was defined
+ - end_time  =  2 # the approximate completion time timestamp if est_iters was defined
+ - sec_per_step  =  3 # the average seconds per step
+ - progress  =  4 # the completed iterations, and the remaining iterations if est_iters was defined
+ - bargraph  =  5 # a bar graph showing progress if est_iters was defined
+ - default  =  tuple(range(6)) # each of the above
