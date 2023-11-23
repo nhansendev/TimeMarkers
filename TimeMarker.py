@@ -51,11 +51,11 @@ def time_dec(just=50):
     def _time_dec(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
-            print(f'"{func.__name__}" ->'.ljust(just), end="", flush=True)
+            print(f'> "{func.__name__}"'.ljust(just), end="", flush=True)
             st = time.time()
             out = func(*args, **kwargs)
             elap = time.time() - st
-            print(f"{(elap):.2E} sec")
+            print(f"{(elap):.2f} sec ({sec_to_HMS(elap, True)}) hh:mm:ss")
             return out
 
         return wrapper
