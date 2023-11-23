@@ -4,7 +4,27 @@ Some simple Python time tracking utilities.
 Known working on Python 3.11, and assumed working for all Python 3+
 
 Dependencies: None
-# Classes
+# Classes/Functions
+## time_dec
+A decorator which times the execution of a given function
+
+### Configuration:
+#### just | *int, default=50*:
+>Justifies the output for neatness
+	
+### Usage Example:
+    from TimeMarkers import time_dec
+    
+    @time_dec()	# parenthesis are mandatory, but can be empty or used to specify "just" arg
+    def test():
+        for _ in range(30):
+        time.sleep(0.1)
+    
+    test()
+
+### Result:
+    > "test"                                          3.01 sec (00:00:03.012) hh:mm:ss
+ 
 ## TimeWrap
 A context manager class which times the bulk execution of code within its context.
 
@@ -20,9 +40,9 @@ A context manager class which times the bulk execution of code within its contex
     from TimeMarkers import TimeWrap
     
     with TimeWrap("Processing..."):
-    	*your code*
-	with TimeWrap("Step 2...", use_HMS_format=True):
-		*more code*
+        *your code*
+    with TimeWrap("Step 2...", use_HMS_format=True):
+        *more code*
 
 ### Result:
 	> Processing...                                     Done, 1.151 sec
@@ -71,11 +91,12 @@ A configurable timer class for tracking time in long-running processes
     from TimeMarkers import TimeMarker
     
     TM = TimeMarker(100, 10)
-
-	for _ in range(100):
-		TM() # Should be placed before code execution in loop
-		*do something*	
-	TM() # Should be called one final time afterwards to show 100%
+    
+    for _ in range(100):
+        TM() # Should be placed before code execution in loop
+        *do something*	
+        
+    TM() # Should be called one final time afterwards to show 100%
 
 ### Result:
 Default config:
