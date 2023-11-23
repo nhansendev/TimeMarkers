@@ -45,6 +45,24 @@ class TimeWrap:
             print(f"Done, {time.time()-self.st:.3f} sec")
 
 
+def time_dec(just=50):
+    # A decorator for timing functions.
+    # Must be written with parenthesis and optional justification arg "@time_dec()" or "@time_dec(<an integer>)"
+    def _time_dec(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            print(f'"{func.__name__}" ->'.ljust(just), end="", flush=True)
+            st = time.time()
+            out = func(*args, **kwargs)
+            elap = time.time() - st
+            print(f"{(elap):.2E} sec")
+            return out
+
+        return wrapper
+
+    return _time_dec
+
+
 class TimeMarker:
     def __init__(
         self,
