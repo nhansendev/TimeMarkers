@@ -5,8 +5,9 @@
 # LICENSE file in the root directory of this source tree.
 
 import time
-from Util import sec_to_HMS, progress_bar, to_set_len_str
+from .Util import sec_to_HMS, progress_bar, to_set_len_str
 from enum import Enum
+from functools import wraps
 
 
 class CallbackMode(Enum):
@@ -24,6 +25,24 @@ class Segments(Enum):
     progress = 4
     bargraph = 5
     default = tuple(range(6))
+
+
+def time_dec(just=50):
+    # A decorator for timing functions.
+    # Must be written with parenthesis and optional justification arg "@time_dec()" or "@time_dec(<an integer>)"
+    def _time_dec(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            print(f'> "{func.__name__}"'.ljust(just), end="", flush=True)
+            st = time.time()
+            out = func(*args, **kwargs)
+            elap = time.time() - st
+            print(f"{(elap):.2f} sec ({sec_to_HMS(elap, True)}) hh:mm:ss")
+            return out
+
+        return wrapper
+
+    return _time_dec
 
 
 class TimeWrap:
@@ -60,6 +79,7 @@ class TimeMarker:
         progress_bar_length=50,
         oneline=False,
         segments=Segments.default.value,
+        remain_from_iters=False,
     ) -> None:
         if callback is not None and not callable(callback):
             raise TypeError("Provided callback must be callable, or <None>!")
@@ -67,9 +87,16 @@ class TimeMarker:
         if callback_mode not in CallbackMode:
             raise ValueError("Unknown value for callback mode")
 
-        if not hasattr(segments, "__iter__") or not all(
-            [seg in Segments for seg in segments]
-        ):
+        found = []
+        vals = [seg.value for seg in Segments]
+        for seg in segments:
+            try:
+                Segments(seg)
+                found.append(True)
+            except ValueError:
+                found.append(seg in vals)
+
+        if not hasattr(segments, "__iter__") or not all(found):
             raise ValueError("Unknown segment definition")
 
         self.est_iters = est_iters
@@ -84,6 +111,7 @@ class TimeMarker:
         self.progress_bar_length = progress_bar_length
         self.oneline = oneline
         self.segments = segments
+        self.remain_from_iters = remain_from_iters
         self.reset()
 
     def reset(self) -> None:
@@ -133,10 +161,15 @@ class TimeMarker:
 
     def _print_update(self):
         seg0 = self.get_now_str()
-        seg3 = f"{self.elapsed:.3f} sec/step avg <{sec_to_HMS(self.elapsed)}>"
+        seg3 = f"{self._smooth_time:.3f} sec/step avg <{sec_to_HMS(self._smooth_time)}>"
 
         if self.est_iters is not None:
-            time_remaining = self.elapsed * (self.est_iters - self._iters)
+            if self.remain_from_iters:
+                time_remaining = self._smooth_time * (self.est_iters - self._iters)
+            else:
+                time_remaining = self.total_duration * (
+                    self.est_iters / max(1, self._iters) - 1
+                )
             seg1 = f"{sec_to_HMS(self.total_duration)}/{sec_to_HMS(time_remaining)} elap/rem"
             seg2 = f"Est: {self.get_now_str(time_remaining)}"
             seg4 = f"{self._iters:{len(str(self.est_iters))}d}/{self.est_iters} pts ({to_set_len_str(self._iters/self.est_iters*100)}%)"
@@ -196,7 +229,7 @@ class TimeMarker:
 
 if __name__ == "__main__":
     TM = TimeMarker(
-        30,
+        est_iters=30,
         index_interval=3,
         progress_bar=True,
         oneline=False,
@@ -205,5 +238,12 @@ if __name__ == "__main__":
 
     for _ in range(30):
         TM()
-        time.sleep(0.1)
+        time.sleep(1)
     TM()
+
+    # @time_dec()
+    # def test():
+    #     for _ in range(30):
+    #         time.sleep(0.1)
+
+    # test()

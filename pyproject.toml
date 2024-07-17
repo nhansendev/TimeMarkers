@@ -1,0 +1,22 @@
+[project]
+name = "TimeMarker"
+version = "1.0"
+authors = [
+  { name="Nathan Hansen", email="nhmsoe16@gmail.com" },
+]
+description = "Some simple utilities for tracking time in Python"
+readme = "README.md"
+requires-python = ">=3.6"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/nhansendev/TimeMarkers"
+Issues = "https://github.com/nhansendev/TimeMarkers/issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
