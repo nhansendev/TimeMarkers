@@ -4,7 +4,8 @@
 # This source code is licensed under the BSD-style license found in the
 # LICENSE file in the root directory of this source tree.
 
-def sec_to_HMS(value, show_ms=False):
+
+def sec_to_HMS(value, show_ms=False, show_zero_hour=False):
     # Convert numerical seconds to string HH:MM:SS / HH:MM:SS.ms
 
     value = max(0, value)
@@ -13,9 +14,12 @@ def sec_to_HMS(value, show_ms=False):
     s = 60 * (m - int(m))
     ms = s - int(s)
 
-    return f"{int(h):02d}:{int(m):02d}:{int(s):02d}" + (
-        f"{ms:.3f}"[1:] if show_ms else ""
-    )
+    if not show_zero_hour and int(h) == 0:
+        return f"{int(m):02d}:{int(s):02d}" + (f"{ms:.3f}"[1:] if show_ms else "")
+    else:
+        return f"{int(h):02d}:{int(m):02d}:{int(s):02d}" + (
+            f"{ms:.3f}"[1:] if show_ms else ""
+        )
 
 
 def progress_bar(
@@ -28,7 +32,7 @@ def progress_bar(
 
     ratio = (i - imin) / (imax - imin)
     i = max(0, min(barsize, int(barsize * ratio)))
-    text = "▒" * i
+    text = "█" * i
     iter = " " * (grid - 1) + "."
 
     if i < barsize:

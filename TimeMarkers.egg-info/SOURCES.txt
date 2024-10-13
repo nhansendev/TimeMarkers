@@ -1,0 +1,10 @@
+LICENSE
+README.md
+setup.py
+TimeMarkers/Util.py
+TimeMarkers/__init__.py
+TimeMarkers/timemarkers.py
+TimeMarkers.egg-info/PKG-INFO
+TimeMarkers.egg-info/SOURCES.txt
+TimeMarkers.egg-info/dependency_links.txt
+TimeMarkers.egg-info/top_level.txt
