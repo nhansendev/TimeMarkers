@@ -4,6 +4,20 @@ Some simple Python time tracking utilities.
 Known working on Python 3.11, and assumed working for all Python 3+
 
 Dependencies: None
+
+# Installation
+From within the TimeMarkers folder:
+
+```
+pip install .
+```
+
+To uninstall:
+
+```
+pip uninstall TimeMarkers
+```
+
 # Classes
 ## TimeWrap
 A context manager class which times the bulk execution of code within its context.
